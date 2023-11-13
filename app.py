@@ -11,11 +11,15 @@ def homepage():
 @app.route("/twilio/receiveMessage", methods=['POST'])
 def receiveMessage():
     try: 
+        #Mensagem para iniciar conversa
         message = request.form.get('Body', '').strip()
         sender_id = request.form['From']
 
         send_message(sender_id, "Olá, escolha, 1 ou 2")
+        #Criar algum meio para esperar uma resposta
         message = request.form.get('Body', '').strip()
+        if message==None:
+            message = request.form.get('Body', '').strip()
 
         if message.isnumeric()==True:
             message=int(message)
@@ -34,4 +38,3 @@ def receiveMessage():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
