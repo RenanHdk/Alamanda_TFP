@@ -1,6 +1,4 @@
-from functions.openai import get_result
 from functions.twilio import send_message
-from functions.teste import teste
 from flask import Flask, request
 
 
@@ -13,30 +11,24 @@ def homepage():
 @app.route("/twilio/receiveMessage", methods=['POST'])
 def receiveMessage():
     try: 
-        sender_id = request.form['From']
-        send_message(sender_id, "1 ou 2")
         message = request.form.get('Body', '').strip()
+        sender_id = request.form['From']
+
+        send_message(sender_id, "Olá, escolha, 1 ou 2")
+        message = request.form.get('Body', '').strip()
+
         if message.isnumeric()==True:
             message=int(message)
-        message1 = request.form['Body']
-        print(f'message: {message}, tipo: {type(message)}', f'message1: {message1}, tipo: {type(message1)}', sep='\n')
+        print(f'message: {message}, tipo: {type(message)}')
         
+
         if message!=1 or message!=2:
-            print(f'message: {message}, tipo: {type(message)}')
             send_message(sender_id, "Apenas 1 ou 2")
+            print(f'message: {message}, tipo: {type(message)}')
         else:
             send_message(sender_id, message)
 
 
-        # message = request.form['Body']
-
-        # print(f'Mensagem: {message}', f'Número de quem enviou: {sender_id}')
-        # try:
-        #     result = get_result(message)
-        #     print(result)
-        #     send_message(sender_id, result)
-        # except Exception as e:
-        #     print("Erro: ", e)
     except Exception as e:
         print("Erro: ", e)
     return 'OK', 200
