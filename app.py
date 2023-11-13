@@ -14,9 +14,9 @@ def homepage():
 def receiveMessage():
     try: 
         sender_id = request.form['From']
-        send_message(sender_id, "1 ou 2")
         message = request.form.get('Body', '').strip()
         message1 = request.form['Body']
+        send_message(sender_id, "1 ou 2")
         print(f'message: {message}, tipo: {type(message)}', f'message1: {message1}, tipo: {type(message1)}', sep='\n')
         message = int(message)
         if message!=1 or message!=2:
