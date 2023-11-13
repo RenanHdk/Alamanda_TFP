@@ -22,6 +22,7 @@ def receiveMessage():
         print(f'message: {message}, tipo: {type(message)}', f'message1: {message1}, tipo: {type(message1)}', sep='\n')
         
         if message!=1 or message!=2:
+            print(f'message: {message}, tipo: {type(message)}')
             send_message(sender_id, "Apenas 1 ou 2")
         else:
             send_message(sender_id, message)
