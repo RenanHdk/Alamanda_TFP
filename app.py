@@ -21,6 +21,7 @@ def receiveMessage():
         message = int(message)
         if message!=1 or message!=2:
             send_message(sender_id, "Apenas 1 ou 2")
+            print(message, type(message))
         else:
             send_message(sender_id, message)
 
