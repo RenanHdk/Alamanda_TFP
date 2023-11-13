@@ -15,7 +15,7 @@ def receiveMessage():
     try: 
         sender_id = request.form['From']
         send_message(sender_id, "1 ou 2")
-        message = request.form['Body']
+        message = request.form.get('Body', '').strip()
         if message!=1 or message!=2:
             send_message(sender_id, "Apenas 1 ou 2")
         else:
