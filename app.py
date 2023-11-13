@@ -14,14 +14,15 @@ def homepage():
 def receiveMessage():
     try: 
         sender_id = request.form['From']
-        message = request.form.get('Body', '').strip()
-        message1 = request.form['Body']
         send_message(sender_id, "1 ou 2")
+        message = request.form.get('Body', '').strip()
+        if message.isnumeric()==True:
+            message=int(message)
+        message1 = request.form['Body']
         print(f'message: {message}, tipo: {type(message)}', f'message1: {message1}, tipo: {type(message1)}', sep='\n')
-        message = int(message)
+        
         if message!=1 or message!=2:
             send_message(sender_id, "Apenas 1 ou 2")
-            print(message, type(message))
         else:
             send_message(sender_id, message)
 
