@@ -13,9 +13,17 @@ def homepage():
 @app.route("/twilio/receiveMessage", methods=['POST'])
 def receiveMessage():
     try: 
-        # message = request.form['Body']
         sender_id = request.form['From']
-        teste(sender_id)
+        send_message(sender_id, "1 ou 2")
+        message = request.form['Body']
+        if message!=1 or message!=2:
+            send_message(sender_id, "Apenas 1 ou 2")
+        else:
+            send_message(sender_id, message)
+
+
+        # message = request.form['Body']
+
         # print(f'Mensagem: {message}', f'Número de quem enviou: {sender_id}')
         # try:
         #     result = get_result(message)
@@ -26,3 +34,5 @@ def receiveMessage():
     except Exception as e:
         print("Erro: ", e)
     return 'OK', 200
+
+
