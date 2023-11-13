@@ -17,7 +17,7 @@ def receiveMessage():
         send_message(sender_id, "1 ou 2")
         message = request.form.get('Body', '').strip()
         message1 = request.form['Body']
-        print(f'message: {message}', f'message1: {message1}', sep='\n')
+        print(f'message: {message}, tipo: {type(message)}', f'message1: {message1}, tipo: {type(message1)}', sep='\n')
         if message!=1 or message!=2:
             send_message(sender_id, "Apenas 1 ou 2")
         else:
