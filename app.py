@@ -1,6 +1,6 @@
 from functions.twilio import send_message
 from flask import Flask, request
-
+import time
 
 app = Flask(__name__)
 
@@ -17,9 +17,10 @@ def receiveMessage():
 
         send_message(sender_id, "Olá, escolha, 1 ou 2")
         #Criar algum meio para esperar uma resposta
-        message = request.form.get('Body', '').strip()
         if message==None:
             message = request.form.get('Body', '').strip()
+
+        time.sleep(5)
 
         if message.isnumeric()==True:
             message=int(message)
