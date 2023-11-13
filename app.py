@@ -19,15 +19,14 @@ def receiveMessage():
 
         if message.isnumeric()==True:
             message=int(message)
-        print(f'message: {message}, tipo: {type(message)}, igual a 1: {message==1}')        
-
+        print(f'message: {message}, tipo: {type(message)}, igual a 1: {message==1}')
         
-        if message!=1 or message!=2:
+
+        if message==1 or message==2:
+            send_message(sender_id, message)
+        else:
             send_message(sender_id, "Apenas 1 ou 2")
             print(f'message: {message}, tipo: {type(message)}')
-        else:
-            send_message(sender_id, message)
-
 
     except Exception as e:
         print("Erro: ", e)
