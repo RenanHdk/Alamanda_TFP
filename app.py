@@ -2,8 +2,6 @@ from functions.twilio import send_message
 from flask import Flask, request
 
 
-fluxo_conversa = 0
-
 
 app = Flask(__name__)
 
@@ -17,6 +15,7 @@ def homepage():
 
 @app.route("/twilio/receiveMessage", methods=['POST'])
 def receiveMessage():
+    fluxo_conversa = 0
     try: 
         #Mensagem para iniciar conversa
         message = request.form.get('Body', '').strip()
