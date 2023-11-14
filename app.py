@@ -15,7 +15,7 @@ def homepage():
 
 @app.route("/twilio/receiveMessage", methods=['POST'])
 def receiveMessage():
-    fluxo_conversa = 0
+    global fluxo_conversa
     try: 
         #Mensagem para iniciar conversa
         message = request.form.get('Body', '').strip()
