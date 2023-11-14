@@ -1,8 +1,15 @@
 from functions.twilio import send_message
 from flask import Flask, request
-import time
+
+
+fluxo_conversa = 0
+
 
 app = Flask(__name__)
+
+# def filtro(sender_id):
+#     send_message("1 ou 2 ?")
+
 
 @app.route("/")
 def homepage():
@@ -15,24 +22,22 @@ def receiveMessage():
         message = request.form.get('Body', '').strip()
         sender_id = request.form['From']
 
-        send_message(sender_id, "Olá, escolha, 1 ou 2")
-        #Criar algum meio para esperar uma resposta
-        if message==None:
-            message = request.form.get('Body', '').strip()
+        if fluxo_conversa==0:
+            send_message(sender_id, "Olá, escolha, 1 ou 2")
+            fluxo_conversa = 1
 
-        time.sleep(5)
+        elif fluxo_conversa==1:
+            if message.isnumeric() and int(message)==1 or int(message)==2:
+                fluxo_conversa = 2    
+            else:
+                fluxo_conversa = 3
 
-        if message.isnumeric()==True:
-            message=int(message)
-        print(f'message: {message}, tipo: {type(message)}, igual a 1: {message==1}')
-        
+        elif fluxo_conversa==2:
+            send_message("Boua (0 _ 0)")
 
-        if message==1 or message==2:
-            send_message(sender_id, message)
-        else:
-            send_message(sender_id, "Apenas 1 ou 2")
-            print(f'message: {message}, tipo: {type(message)}')
-
+        elif fluxo_conversa==3:
+            send_message("Escreve certo burrão, 1 ou 2 ?")
+            fluxo_conversa==1
     except Exception as e:
         print("Erro: ", e)
     return 'OK', 200
