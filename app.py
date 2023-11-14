@@ -2,7 +2,7 @@ from functions.twilio import send_message
 from flask import Flask, request
 
 
-fluxo = 0
+fluxo_conversa = 0
 
 
 app = Flask(__name__)
