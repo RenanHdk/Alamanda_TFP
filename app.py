@@ -28,18 +28,15 @@ def receiveMessage():
             fluxo_conversa = 1
 
         elif fluxo_conversa==1:
-            if message.isnumeric() and int(message)==1 or int(message)==2:
-                fluxo_conversa = 2    
+            if message.isnumeric():
+                if int(message)==1 or int(message)==2:
+                    send_message(sender_id, "Boua (0 _ 0)")
+                    fluxo_conversa = 0                
+                else:
+                    send_message(sender_id, "Escreve certo burrão, 1 ou 2 ?")
             else:
-                fluxo_conversa = 3
+                send_message(sender_id, "Escreve certo burrão, 1 ou 2 ?")
 
-        elif fluxo_conversa==2:
-            send_message(sender_id, "Boua (0 _ 0)")
-            fluxo_conversa = 0
-
-        elif fluxo_conversa==3:
-            send_message(sender_id, "Escreve certo burrão, 1 ou 2 ?")
-            fluxo_conversa==1
     except Exception as e:
         print("Erro: ", e)
     return 'OK', 200
